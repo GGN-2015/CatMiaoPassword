@@ -41,6 +41,14 @@ def checkSign(signed_data: bytes, password: bytes) -> bytes:
         success = False
     return success
 
+def getClientDataFromSignedData(signed_data: bytes) -> bytes:
+    try:
+        dic = json.loads(signed_data.decode())
+        ans = getBase64Decode(dic["data"])
+    except:
+        ans = ""
+    return ans
+
 if __name__ == "__main__":
     signed_data = sign(b"hello world", b"ggn_2015")
     print(checkSign(signed_data, b"ggn_2014"))
